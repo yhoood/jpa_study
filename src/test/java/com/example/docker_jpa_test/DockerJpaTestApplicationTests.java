@@ -32,12 +32,12 @@ class DockerJpaTestApplicationTests {
 //		em.persist(drink);
 
 		Member member = new Member();
-		member.setMemberName("ddd");
-		member.setCity("영등포");
+		member.setMemberName("abc");
+		member.setCity("집주소");
 		em.persist(member);
 
 		Delivery delivery = new Delivery();
-		delivery.setCity("서울역");
+		delivery.setCity("가게주소");
 		em.persist(delivery);
 
 		Order order = new Order();
@@ -106,6 +106,25 @@ class DockerJpaTestApplicationTests {
 			System.out.println("4 -> member = " + result.toString());
 		}
 
+		/*****5.페치조인*****/
+		System.out.println("*****5.페치조인*****");
+
+		List<Order> resultList5 =
+				em.createQuery("SELECT m FROM Order m join fetch m.delivery join fetch m.member",Order.class)
+						.getResultList();
+
+		//컬렉션 패치조인 oneToMany인경우 distinct 필요 (객체이므로 조인되는 n건만큼 OrderList중복생김
+		for (Order result : resultList5) {
+			System.out.println("5 -> order = " + result.toString());
+		}
+
+		List<Member> resultList5_2 =
+				em.createQuery("SELECT distinct m FROM Member m join fetch m.OrderList",Member.class)
+						.getResultList();
+
+		for (Member result : resultList5_2) {
+			System.out.println("6 -> member = " + result.toString());
+		}
 
 		//**************jpql 기본조회
 //		String jpql = "select m from Member as m where m.memberName = 'yhood'";

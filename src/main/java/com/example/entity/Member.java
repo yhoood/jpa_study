@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
 @Table(name = "TB_MEMBER")
 public class Member extends AbstractAddrInfo {
 
@@ -18,5 +17,32 @@ public class Member extends AbstractAddrInfo {
     @Column(name="member_name")
     private String memberName;
 
+    @OneToMany(mappedBy = "member")
+    private List<Order> OrderList=new ArrayList<>();
+
     public Member() {}
+
+    public Long getMemberId() {
+        return memberId;
+    }
+
+    public String getMemberName() {
+        return memberName;
+    }
+
+    public List<Order> getOrderList() {
+        return OrderList;
+    }
+
+    public void setMemberId(Long memberId) {
+        this.memberId = memberId;
+    }
+
+    public void setMemberName(String memberName) {
+        this.memberName = memberName;
+    }
+
+    public void setOrderList(List<Order> orderList) {
+        OrderList = orderList;
+    }
 }

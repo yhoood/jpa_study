@@ -27,10 +27,10 @@ public class OrderItem extends AbstractRegInfo {
 
     public OrderItem() {}
 
-    public void injectOrder(Order order) {
-        this.order = order;
-        order.getOrderItemList().add(this);
-    }
+//    public void injectOrder(Order order) {
+//        this.order = order;
+//        order.getOrderItemList().add(this);
+//    }
     public void injectItem(Item item) {
         this.item = item;
         item.getOderItemList().add(this);

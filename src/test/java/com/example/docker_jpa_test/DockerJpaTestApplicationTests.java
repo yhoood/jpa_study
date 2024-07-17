@@ -31,22 +31,22 @@ class DockerJpaTestApplicationTests {
 //		ItemDrink drink = new ItemDrink("cokacola",500);
 //		em.persist(drink);
 
-		Member member = new Member();
-		member.setMemberName("abc");
-		member.setCity("집주소");
-		em.persist(member);
-
-		Delivery delivery = new Delivery();
-		delivery.setCity("가게주소");
-		em.persist(delivery);
-
-		Order order = new Order();
-		order.setMember(member);
-		order.setDelivery(delivery);
-		LocalDateTime localDateTime = LocalDateTime.now();
-		order.setOrderDate(localDateTime);
-		order.setStatus(ORDER);
-		em.persist(order);
+//		Member member = new Member();
+//		member.setMemberName("aaaa");
+//		member.setCity("나나나");
+//		em.persist(member);
+//
+//		Delivery delivery = new Delivery();
+//		delivery.setCity("가가가");
+//		em.persist(delivery);
+//
+//		Order order = new Order();
+//		order.setMember(member);
+//		order.setDelivery(delivery);
+//		LocalDateTime localDateTime = LocalDateTime.now();
+//		order.setOrderDate(localDateTime);
+//		order.setStatus(ORDER);
+//		em.persist(order);
 
 
 		/*****1.TypeQuery*****/
@@ -110,8 +110,10 @@ class DockerJpaTestApplicationTests {
 		System.out.println("*****5.페치조인*****");
 
 		List<Order> resultList5 =
-				em.createQuery("SELECT m FROM Order m join fetch m.delivery join fetch m.member",Order.class)
-						.getResultList();
+				em.createQuery("SELECT m FROM Order m join fetch m.delivery join fetch m.member Order by m.orderId ASC",Order.class)
+					.setFirstResult(0)    // 조회 시작 위치
+					.setMaxResults(6)
+					.getResultList();
 
 		//컬렉션 패치조인 oneToMany인경우 distinct 필요 (객체이므로 조인되는 n건만큼 OrderList중복생김
 		for (Order result : resultList5) {

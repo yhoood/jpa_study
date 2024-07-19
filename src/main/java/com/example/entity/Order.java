@@ -23,8 +23,8 @@ public class Order extends AbstractRegInfo {
     @JoinColumn(name="delivery_id")
     private Delivery delivery;
 
-    @OneToMany(mappedBy = "order")
-    private List<OrderItem> OrderItemList=new ArrayList<>();
+//    @OneToMany(mappedBy = "order")
+//    private List<OrderItem> OrderItemList=new ArrayList<>();
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="order_date")

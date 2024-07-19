@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 @Entity
+@Data
 @Table(name="TB_ORDERS")
 public class Order extends AbstractRegInfo {
 
@@ -39,5 +40,4 @@ public class Order extends AbstractRegInfo {
 
     public Order() {}
 
-    
 }

@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Data
 @Table(name="TB_DELIVERY")
 public class Delivery extends AbstractAddrInfo {
 
@@ -16,4 +15,20 @@ public class Delivery extends AbstractAddrInfo {
     private EnumDeliveryStatus status;
 
     public Delivery() {}
+
+    public Long getDeliveryId() {
+        return deliveryId;
+    }
+
+    public void setDeliveryId(Long deliveryId) {
+        this.deliveryId = deliveryId;
+    }
+
+    public EnumDeliveryStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(EnumDeliveryStatus status) {
+        this.status = status;
+    }
 }

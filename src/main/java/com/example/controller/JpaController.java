@@ -31,26 +31,26 @@ public class JpaController {
         //Delivery delivery = new Delivery("order_01","김포시","김포한강8로 103동 803호","10067",);
         //em.persist(delivery);
 
-        Member member = new Member();
-        member.setMemberName("yhood");
-        member.setCity("걸포북변역");
-        em.persist(member);
-
-        Delivery delivery = new Delivery();
-        delivery.setCity("고촌역");
-        em.persist(delivery);
-
-        Order order = new Order();
-        order.setMember(member);
-        order.setDelivery(delivery);
-        LocalDateTime localDateTime = LocalDateTime.now();
-        order.setOrderDate(localDateTime);
-        order.setStatus(ORDER);
-        em.persist(order);
+//        Member member = new Member();
+//        member.setMemberName("yhood");
+//        member.setCity("걸포북변역");
+//        em.persist(member);
+//
+//        Delivery delivery = new Delivery();
+//        delivery.setCity("고촌역");
+//        em.persist(delivery);
+//
+//        Order order = new Order();
+//        order.setMember(member);
+//        order.setDelivery(delivery);
+//        LocalDateTime localDateTime = LocalDateTime.now();
+//        order.setOrderDate(localDateTime);
+//        order.setStatus(ORDER);
+//        em.persist(order);
 
 
         List<Member> resultList =
-                em.createQuery("SELECT m FROM Member m", Member.class)
+                em.createQuery("SELECT m FROM Order m join fetch m.member", Member.class)
                 .getResultList();
         
         for(Member result : resultList){

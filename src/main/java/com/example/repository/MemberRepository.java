@@ -1,6 +1,7 @@
 package com.example.repository;
 
-import com.example.entity.Member;
+
+import com.example.domain.Member;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

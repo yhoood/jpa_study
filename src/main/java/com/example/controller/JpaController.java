@@ -1,8 +1,6 @@
 package com.example.controller;
 
-import com.example.domain.Delivery;
 import com.example.domain.Member;
-import com.example.domain.Order;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
@@ -11,9 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
-import static com.example.domain.EnumOrderStatus.ORDER;
 
 @Slf4j
 @RestController
@@ -30,12 +27,13 @@ public class JpaController {
         //em.persist(delivery);
 
 //        Member member = new Member();
-//        member.setMemberName("김아무개");
-//        member.setCity("서울을지로");
+//        member.setMemberName("yhood");
+//        member.setCity("걸포북변역");
 //        em.persist(member);
 //
 //        Delivery delivery = new Delivery();
-//        delivery.setCity("시청역맛집");
+//        delivery.setCity("고촌역");
+
 //        em.persist(delivery);
 //
 //        Order order = new Order();
@@ -44,11 +42,18 @@ public class JpaController {
 //        LocalDateTime localDateTime = LocalDateTime.now();
 //        order.setOrderDate(localDateTime);
 //        order.setStatus(ORDER);
-//
-//
 //        em.persist(order);
-//        Order orderData=em.find(Order.class,order.getOrderId());
-//        System.out.println("이것은 지금 빌드가 되었습니다:"+orderData.toString());
 
+
+        List<Member> resultList =
+                em.createQuery("SELECT m FROM Order m join fetch m.member", Member.class)
+                .getResultList();
+        
+        for(Member result : resultList){
+            System.out.println("result.toString() = " + result.toString());
+        }
+        
+//        Order orderData=em.find(Order.class,order.getOrderId());
+//        System.out.println("정상테스트 실행:"+orderData.toString());
     }
 }

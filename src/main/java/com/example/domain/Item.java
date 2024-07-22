@@ -1,17 +1,19 @@
-package com.example.entity;
+package com.example.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
-@Inheritance(strategy = InheritanceType.JOINED)
+@Getter @Setter
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="item_type")
 @Table(name = "TB_ITEM")
-public class Item extends AbstractRegInfo {
+public abstract class Item {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="item_id")
@@ -31,6 +33,4 @@ public class Item extends AbstractRegInfo {
 
     @ManyToMany(mappedBy = "itemList")
     private List<Category> categoryList=new ArrayList<>();
-
-    public Item() {}
 }

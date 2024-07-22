@@ -1,10 +1,12 @@
-package com.example.entity;
+package com.example.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter @Setter
 @Table(name="TB_ORDER_ITEM")
 public class OrderItem extends AbstractRegInfo {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,17 +15,17 @@ public class OrderItem extends AbstractRegInfo {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
-    private Order order;
+    private Order order;    //주문
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
-    private Item item;
+    private Item item;      //주문상품
 
     @Column(name = "order_price")
-    private int orderPrice;
+    private int orderPrice; //주문가격
 
     @Column(name = "order_count")
-    private int orderCount;
+    private int orderCount; //주문수량
 
     public OrderItem() {}
 

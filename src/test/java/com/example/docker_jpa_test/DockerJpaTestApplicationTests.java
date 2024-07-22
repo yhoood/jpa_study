@@ -1,8 +1,7 @@
 package com.example.docker_jpa_test;
 
-import com.example.entity.Delivery;
-import com.example.entity.Member;
-import com.example.entity.Order;
+import com.example.domain.Member;
+import com.example.domain.Order;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
@@ -12,11 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
-
-import static com.example.entity.EnumOrderStatus.*;
 
 @SpringBootTest
 class DockerJpaTestApplicationTests {

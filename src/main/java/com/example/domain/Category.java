@@ -1,14 +1,17 @@
-package com.example.entity;
+package com.example.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.*;
 
 
 @Entity
-@Data
+@Getter @Setter
 @Table(name="TB_CATEGORY")
-public class Category extends AbstractRegInfo {
+public class Category {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="category_id")
@@ -22,7 +25,7 @@ public class Category extends AbstractRegInfo {
     private Category parent;
 
     @OneToMany(mappedBy = "parent")
-    private List<Category> child=new ArrayList<>();
+    private List<Category> childList=new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name="TB_CATEGORY_ITEM"
@@ -32,4 +35,10 @@ public class Category extends AbstractRegInfo {
     private List<Item> itemList=new ArrayList<>();
 
     public Category() {}
+
+    //==연관관계 메서드==//
+    public void addChildCategory(Category child) {
+        this.childList.add(child);
+        child.setParent(this);
+    }
 }

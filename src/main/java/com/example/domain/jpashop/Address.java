@@ -1,8 +1,7 @@
-package com.example.domain;
+package com.example.domain.jpashop;
 
 import jakarta.persistence.Embeddable;
 import lombok.Getter;
-import lombok.Setter;
 
 @Embeddable
 @Getter

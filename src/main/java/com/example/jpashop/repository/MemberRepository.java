@@ -1,7 +1,7 @@
-package com.example.repository;
+package com.example.jpashop.repository;
 
 
-import com.example.domain.Member;
+import com.example.domain.jpashop.Member;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -22,12 +22,12 @@ public class MemberRepository {
         return em.find(Member.class, id);
     }
 
-    public List<Member> findAll(Long id){
+    public List<Member> findAll(){
         return em.createQuery("select m from Member m",Member.class)
                 .getResultList();
     }
 
-    public List<Member> findName(String name){
+    public List<Member> findByName(String name){
         return em.createQuery("select m from Member m where m.memberName=:name",Member.class)
                 .setParameter("name",name)
                 .getResultList();

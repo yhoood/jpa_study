@@ -1,7 +1,6 @@
-package com.example.domain;
+package com.example.domain.jpashop;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

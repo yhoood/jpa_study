@@ -1,6 +1,6 @@
-package com.example.controller;
+package com.example.jpashop.controller;
 
-import com.example.domain.Member;
+import com.example.domain.jpashop.Member;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;

@@ -1,7 +1,7 @@
 package com.example.docker_jpa_test;
 
-import com.example.domain.Member;
-import com.example.domain.Order;
+import com.example.domain.jpashop.Member;
+import com.example.domain.jpashop.Order;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;

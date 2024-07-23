@@ -1,4 +1,4 @@
-package com.example.domain;
+package com.example.domain.jpashop;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;

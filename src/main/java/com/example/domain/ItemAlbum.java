@@ -8,8 +8,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@DiscriminatorValue("DRINK")
-@Table(name="TB_ITEM_DRINK")
+@DiscriminatorValue("ALBUM")
+//@Table(name="TB_ITEM_ALBUM")
 @Getter @Setter
 public class ItemAlbum extends Item{
     private String artist;

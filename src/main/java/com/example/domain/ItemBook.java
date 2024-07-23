@@ -9,7 +9,7 @@ import lombok.Setter;
 
 @Entity
 @DiscriminatorValue("BOOK")
-@Table(name="TB_ITEM_BOOK")
+//@Table(name="TB_ITEM_BOOK")
 @Getter @Setter
 public class ItemBook extends Item{
 

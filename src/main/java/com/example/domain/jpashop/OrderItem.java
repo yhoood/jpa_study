@@ -38,8 +38,7 @@ public class OrderItem extends AbstractRegInfo {
     }
 
     //==생성 메서드==//
-    public static OrderItem createOrderItem(Item item, int orderPrice, int
-            orderCount) {
+    public static OrderItem createOrderItem(Item item, int orderPrice, int orderCount) {
         OrderItem orderItem = new OrderItem();
         orderItem.setItem(item);
         orderItem.setOrderPrice(orderPrice);

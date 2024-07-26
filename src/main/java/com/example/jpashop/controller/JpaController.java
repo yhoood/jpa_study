@@ -16,10 +16,9 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class JpaController {
 
-    @PersistenceContext
-    private final EntityManager em;
+//    private final EntityManager em;
 
-    @Transactional
+//    @Transactional
 //    @GetMapping("/orders")
 //    public void orders() {
 //

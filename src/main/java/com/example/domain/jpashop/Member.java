@@ -25,4 +25,9 @@ public class Member {
     private List<Order> orderList=new ArrayList<>();
 
     public Member() {}
+
+    public Member(String memberName, Address address) {
+        this.memberName = memberName;
+        this.address = address;
+    }
 }

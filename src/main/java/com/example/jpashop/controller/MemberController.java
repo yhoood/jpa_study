@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -32,9 +33,9 @@ public class MemberController {
     }
 
     @GetMapping("/memberList")
-    public Map<String, Object> memberList(@RequestParam Map<String, Object> paramMap) {
+    public List<Member> memberList(@RequestParam Map<String, Object> paramMap) {
         log.info("memberList controller");
         System.out.println("paramMap.toString() = " + paramMap.toString());
-        return paramMap;
+        return memberService.findMembers();
     }
 }

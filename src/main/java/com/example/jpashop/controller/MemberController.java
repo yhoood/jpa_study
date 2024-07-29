@@ -2,9 +2,7 @@ package com.example.jpashop.controller;
 
 import com.example.domain.jpashop.Address;
 import com.example.domain.jpashop.Member;
-import com.example.jpashop.repository.MemberRepository;
 import com.example.jpashop.service.MemberService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;

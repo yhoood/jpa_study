@@ -2,7 +2,7 @@ package com.example.jpashop.service;
 
 import com.example.domain.jpashop.*;
 import com.example.jpashop.repository.ItemRepository;
-import com.example.jpashop.repository.MemberRepository;
+import com.example.jpashop.repository.MemberJpaRepository;
 import com.example.jpashop.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,14 +12,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class OrderService {
-    private final MemberRepository memberRepository;
+    private final MemberJpaRepository memberJpaRepository;
     private final OrderRepository orderRepository;
     private final ItemRepository itemRepository;
     /** 주문 */
     @Transactional
     public Long order(Long memberId, Long itemId, int orderCount) {
         //엔티티 조회
-        Member member = memberRepository.findOne(memberId);
+        Member member = memberJpaRepository.findOne(memberId);
         Item item = itemRepository.findOne(itemId);
         //배송정보 생성
         Delivery delivery = new Delivery();

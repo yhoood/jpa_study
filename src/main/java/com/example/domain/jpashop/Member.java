@@ -1,7 +1,9 @@
 package com.example.domain.jpashop;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.*;
@@ -9,6 +11,7 @@ import java.util.*;
 @Entity
 @Getter @Setter //실무에서는 setter 사용시 변경지점을 파악하기 힘들기에 setter대신 메소드를 별도 제공 해야함.
 @Table(name = "TB_MEMBER")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,8 +26,6 @@ public class Member {
 
     @OneToMany(mappedBy = "member")
     private List<Order> orderList=new ArrayList<>();
-
-    public Member() {}
 
     public Member(String memberName, Address address) {
         this.memberName = memberName;

@@ -1,11 +1,10 @@
 package com.example.jpashop.service;
 import com.example.domain.jpashop.Member;
-import com.example.jpashop.repository.MemberRepository;
+import com.example.jpashop.repository.MemberJpaRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 import static org.junit.Assert.assertEquals;
@@ -18,7 +17,7 @@ public class MemberServiceTest {
     @Autowired
     MemberService memberService;
     @Autowired
-    MemberRepository memberRepository;
+    MemberJpaRepository memberJpaRepository;
     @Test
     public void 회원가입() throws Exception {
         //Given
@@ -27,7 +26,7 @@ public class MemberServiceTest {
         //When
         Long saveId = memberService.save(member);
         //Then
-        assertEquals(member, memberRepository.findOne(saveId));
+        assertEquals(member, memberJpaRepository.findOne(saveId));
     }
     @Test(expected = IllegalStateException.class)
     public void 중복_회원_예외() throws Exception {

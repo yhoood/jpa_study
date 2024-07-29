@@ -31,9 +31,9 @@ public class MemberServiceTest {
     @Test(expected = IllegalStateException.class)
     public void 중복_회원_예외() throws Exception {
         //Given
-        Member member1 = new Member();
+        Member member1 = Member.createMember();
         member1.setMemberName("kim");
-        Member member2 = new Member();
+        Member member2 = Member.createMember();
         member2.setMemberName("kim");
         //When
         memberService.save(member1);

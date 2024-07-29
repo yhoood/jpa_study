@@ -31,4 +31,12 @@ public class Member {
         this.memberName = memberName;
         this.address = address;
     }
+
+    public void changeName(String memberName){
+        this.memberName = memberName;
+    }
+
+    public static Member createMember(){
+        return new Member();
+    }
 }

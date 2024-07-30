@@ -2,11 +2,13 @@ package com.example.jpashop.controller;
 
 import com.example.domain.jpashop.Address;
 import com.example.domain.jpashop.Member;
+import com.example.jpashop.dto.MemberDto;
 import com.example.jpashop.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -33,7 +35,14 @@ public class MemberController {
     @GetMapping("/memberList")
     public List<Member> memberList(@RequestParam Map<String, Object> paramMap) {
         log.info("memberList controller");
-        System.out.println("paramMap.toString() = " + paramMap.toString());
-        return memberService.findMembers();
+        //return memberService.findAllnoInterface();
+
+        //return memberService.findAll();                                                   //JpaRepository 기본 메소드 (all)
+        //return memberService.findByMemberId(1);                                           //method name query (pk)
+        //return memberService.findByMemberIdAndMemberName(2,"김아무개");                    //method name query (optional)
+        //return memberService.findByMemberIdInOrAddressCity(Arrays.asList(8L,9L),"서울");   //method name query (in)
+        return memberService.findByMemberParam(Arrays.asList(8L,9L),"서울");          //@Query Annotation (in)
+        //return memberService.findAllMemberDto();                                          //@Query Dto사용
+        //return memberService.findLeftFetchSelect();                                       //left join fetch
     }
 }

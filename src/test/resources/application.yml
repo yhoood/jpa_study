@@ -2,7 +2,7 @@
 spring:
   datasource:
     #url: jdbc:mariadb://host.docker.internal:3310/jpa_db?useSSL=false
-    url: jdbc:mariadb://localhost:3306/jpa_db?useSSL=false
+    url: jdbc:mariadb://localhost:3310/jpa_db?useSSL=false
     #url: jdbc:mariadb://database_server:3306/jpa_db?useSSL=false
     username: yhood
     password: 1234
@@ -10,7 +10,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create        #validate
+      ddl-auto: none        #validate
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl #Table 매핑 대문자허용(지정한대로)
     properties:

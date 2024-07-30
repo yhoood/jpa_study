@@ -23,8 +23,10 @@ public class MemberJpaRepository {
     }
 
     public List<Member> findAll(){
-        return em.createQuery("select m from Member m",Member.class)
-                .getResultList();
+        List<Member> mbmbers =em.createQuery("select m from Member m",Member.class)
+                                .getResultList();
+    return mbmbers;
+
     }
 
     public List<Member> findByName(String name){

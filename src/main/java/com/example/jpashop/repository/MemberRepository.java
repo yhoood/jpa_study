@@ -15,7 +15,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     List<Member> findByMemberName(@Param("memberName") String memberName);
 
     //method name query (pk)
-    List<Member> findByMemberId(long id);
+    Member findByMemberId(long id);
 
     //method name query (optional)
     Optional<Member> findByMemberIdAndMemberName(long id,String name);

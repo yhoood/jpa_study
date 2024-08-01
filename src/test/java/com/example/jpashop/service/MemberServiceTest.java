@@ -26,23 +26,27 @@ import static org.junit.Assert.fail;
 @Transactional(readOnly = true)
 public class MemberServiceTest {
     @Autowired
-    MemberService memberService;
-
-    @Test
-    public void springDataJpaTest() throws Exception {
-
-    }
-
+    MemberRepository memberRepository;
 
     @PersistenceContext
     EntityManager em;
-    @Autowired
-    MemberJpaRepository memberJpaRepository;
-    @Autowired
-    MemberRepository memberRepository;
-    @Autowired
-    OrderRepository orderRepository;
+//    @Autowired
+//    OrderRepository orderRepository;
+    @Test
+    @Transactional
+    @Rollback(false)
+    public void springDataJpaTest() throws Exception {
+        List<Member>members =memberRepository.findAll();
+        int cnt = members.get(5).getOrderList().size();
+    }
 
+
+//    @PersistenceContext
+//    EntityManager em;
+//    @Autowired
+//    MemberJpaRepository memberJpaRepository;
+//    @Autowired
+//    MemberService memberService;
 
 //    @Test
 //    public void 회원가입() throws Exception {
@@ -109,23 +113,23 @@ public class MemberServiceTest {
         //List<Member> members = memberService.findAllnoInterface();
 
         //List<Member> members = memberService.findByMemberId(1);
-//        Member member =memberService.findByMemberIdAndMemberName(3,"김아무개");
+        //Member member =memberService.findByMemberIdAndMemberName(3,"yhoood");
 //        System.out.println("member.toString() = " + member.getMemberName());
 
         //List<Order> orders = orderRepository.findAll();
 
 
-        List<Member> members = memberService.findByMemberName("yhoood");
+        //List<Member> members = memberService.findByMemberName("yhoood");
 
         //List<Member> members = memberService.findByMemberIdInOrAddressCity(Arrays.asList(8L,9L),"서울");
-//        List<Member> members = memberService.findByMemberParam(Arrays.asList(8L,9L),"서울");
+        //List<Member> members = memberService.findByMemberParam(Arrays.asList(8L,9L),"서울");
 //        System.out.println("members.size() = " + members.size());
-        //dto test
+       //dto test
 //        List<MemberDto> memberDtoList =  memberService.findAllMemberDto();
-//        Iterator<MemberDto> iterator = memberDtoList.iterator();
+//        Iterator<Member> iterator = memberList.iterator();
 //        while (iterator.hasNext()) {
-//            MemberDto memberDto = iterator.next();
-//            System.out.println("memberDto.toString() = " + memberDto.getMemberName()+"/"+memberDto.getCity());
+//            Member member = iterator.next();
+//            System.out.println("memberDto.toString() = " + member.getMemberName()+"/"+member.getCity());
 //        }
 
         //지연로딩 테스트
@@ -137,11 +141,11 @@ public class MemberServiceTest {
 
 
         //Then
-        Iterator<Member> iterator = members.iterator();
-        while (iterator.hasNext()) {
-            Member member = iterator.next();
-            System.out.println("member.toString() = " + member.getMemberId()+"/"+member.getMemberName());
-        }
+//        Iterator<Member> iterator = members.iterator();
+//        while (iterator.hasNext()) {
+//            Member member = iterator.next();
+//            System.out.println("member.toString() = " + member.getMemberId()+"/"+member.getMemberName());
+//        }
 
 //        Iterator<Order> iterator = orders.iterator();
 //        while (iterator.hasNext()) {

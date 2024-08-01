@@ -61,7 +61,7 @@ public class MemberService {
     }
 
     //method name query (pk)
-    public List<Member> findByMemberId(long id) {
+    public Member findByMemberId(long id) {
         return memberRepository.findByMemberId(id);
     }
 
@@ -79,7 +79,6 @@ public class MemberService {
     public List<Member> findByMemberParam(List<Long> idList, String city){
         return memberRepository.findByMemberParam(idList, city);
     }
-
     //@Query Dto사용
     public List<MemberDto> findAllMemberDto() {
         return memberRepository.findAllMemberDto();

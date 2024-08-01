@@ -37,11 +37,11 @@ public class MemberController {
         log.info("memberList controller");
         //return memberService.findAllnoInterface();
 
-        //return memberService.findAll();                                                   //JpaRepository 기본 메소드 (all)
+        return memberService.findAll();                                                   //JpaRepository 기본 메소드 (all)
         //return memberService.findByMemberId(1);                                           //method name query (pk)
         //return memberService.findByMemberIdAndMemberName(2,"김아무개");                    //method name query (optional)
         //return memberService.findByMemberIdInOrAddressCity(Arrays.asList(8L,9L),"서울");   //method name query (in)
-        return memberService.findByMemberParam(Arrays.asList(8L,9L),"서울");          //@Query Annotation (in)
+        //return memberService.findByMemberParam(Arrays.asList(8L,9L),"서울");          //@Query Annotation (in)
         //return memberService.findAllMemberDto();                                          //@Query Dto사용
         //return memberService.findLeftFetchSelect();                                       //left join fetch
     }

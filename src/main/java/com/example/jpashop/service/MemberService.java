@@ -6,6 +6,8 @@ import com.example.jpashop.dto.MemberDto;
 import com.example.jpashop.repository.MemberJpaRepository;
 import com.example.jpashop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -57,12 +59,17 @@ public class MemberService {
 
     //namedQuery
     public List<Member> findByMemberName(String memberName) {
-        return memberRepository.findByMemberName(memberName);
+        return memberRepository.namedFindByMemberName(memberName);
     }
 
     //method name query (pk)
     public Member findByMemberId(long id) {
         return memberRepository.findByMemberId(id);
+    }
+
+    //!!!!!!!!!!!!!!!!!!!Page처리
+    public Page<Member> findByMemberName(String memberName, Pageable pageable) {
+        return memberRepository.findByMemberName(memberName,pageable);
     }
 
     //method name query (optional)

@@ -6,6 +6,8 @@ import com.example.jpashop.dto.MemberDto;
 import com.example.jpashop.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -44,5 +46,14 @@ public class MemberController {
         //return memberService.findByMemberParam(Arrays.asList(8L,9L),"서울");          //@Query Annotation (in)
         //return memberService.findAllMemberDto();                                          //@Query Dto사용
         //return memberService.findLeftFetchSelect();                                       //left join fetch
+    }
+
+    @GetMapping("/membersPage")
+    public Page<MemberDto> memberList2(Pageable pageable) {
+        log.info("memberList controller");
+        Page<Member> page = memberService.findByMemberName("고구마",pageable);
+        //Page<MemberDto> result = page.map(member ->new MemberDto(member)); 변환전
+        Page<MemberDto> result = page.map(MemberDto::new);
+        return result;
     }
 }

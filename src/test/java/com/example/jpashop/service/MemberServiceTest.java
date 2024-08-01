@@ -10,6 +10,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,14 +33,25 @@ public class MemberServiceTest {
 
     @PersistenceContext
     EntityManager em;
+
+    @Autowired
+    MemberService memberService;
 //    @Autowired
 //    OrderRepository orderRepository;
     @Test
     @Transactional
     @Rollback(false)
     public void springDataJpaTest() throws Exception {
-        List<Member>members =memberRepository.findAll();
-        int cnt = members.get(5).getOrderList().size();
+        PageRequest pageRequest = PageRequest.of(0, 2,Sort.by(Sort.Direction.DESC,"memberName"));
+//        Page<Member> page = memberRepository.findAll(pageRequest);
+        Page<Member> page = memberService.findByMemberName("고구마",pageRequest);
+        System.out.println(page.getContent());
+        System.out.println(page.getContent().size());
+        System.out.println(page.getTotalElements());
+        System.out.println(page.getNumber());
+        System.out.println(page.getTotalPages());
+        System.out.println(page.isFirst());
+        System.out.println(page.hasNext());
     }
 
 
@@ -45,8 +59,7 @@ public class MemberServiceTest {
 //    EntityManager em;
 //    @Autowired
 //    MemberJpaRepository memberJpaRepository;
-//    @Autowired
-//    MemberService memberService;
+
 
 //    @Test
 //    public void 회원가입() throws Exception {

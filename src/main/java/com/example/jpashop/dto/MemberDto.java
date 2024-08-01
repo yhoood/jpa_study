@@ -1,4 +1,5 @@
 package com.example.jpashop.dto;
+import com.example.domain.jpashop.Member;
 import lombok.Data;
 
 @Data
@@ -13,5 +14,9 @@ public class MemberDto {
         this.city = city;
         this.street = street;
         this.zipcode = zipcode;
+    }
+
+    public MemberDto(Member member) {
+        this.memberName = member.getMemberName();
     }
 }

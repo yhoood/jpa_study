@@ -2,6 +2,8 @@ package com.example.jpashop.repository;
 
 import com.example.domain.jpashop.Member;
 import com.example.jpashop.dto.MemberDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -12,10 +14,15 @@ import java.util.Optional;
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
     //namedQuery
-    List<Member> findByMemberName(@Param("memberName") String memberName);
+    List<Member> namedFindByMemberName(@Param("memberName") String memberName);
 
     //method name query (pk)
     Member findByMemberId(long id);
+
+    //페이징 처리 쿼리메소드
+    @Query(value = "select m from Member m left join m.orderList ol",
+                countQuery = "select count(m.memberName) from Member m")
+    Page<Member> findByMemberName(String memberName, Pageable pageable);
 
     //method name query (optional)
     Optional<Member> findByMemberIdAndMemberName(long id,String name);

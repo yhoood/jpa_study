@@ -12,7 +12,7 @@ import java.util.*;
 @Getter @Setter //실무에서는 setter 사용시 변경지점을 파악하기 힘들기에 setter대신 메소드를 별도 제공 해야함.
 @Table(name = "TB_MEMBER")
 @NamedQuery(
-        name="Member.findByMemberName",
+        name="Member.namedFindByMemberName",
         query="select m from Member m where m.memberName = :memberName")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {

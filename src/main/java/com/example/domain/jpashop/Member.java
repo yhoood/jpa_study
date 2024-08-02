@@ -15,7 +15,7 @@ import java.util.*;
         name="Member.namedFindByMemberName",
         query="select m from Member m where m.memberName = :memberName")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member {
+public class Member extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="member_id")

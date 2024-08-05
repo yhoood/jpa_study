@@ -104,16 +104,15 @@ class DockerJpaTestApplicationTests {
 		/*****5.페치조인*****/
 		System.out.println("*****5.페치조인*****");
 
-		String query = "SELECT m FROM Order m join fetch m.delivery join fetch m.member";
-		       query +="WHERE m.member.memberName=:memberName";
-			   query +="Order by m.orderId ASC";
-
-		List<Order> resultList=
-				em.createQuery(query,Order.class)
-						.setParameter("memberName", "yhoood")
-						.setFirstResult(0)    // 조회 시작 위치
-						.setMaxResults(6)
-						.getResultList();
+//		String query = "SELECT m FROM Order m join fetch m.member WHERE m.member.memberName=:memberName";
+//			   query +="Order by m.orderId ASC";
+//
+//		List<Order> resultList=
+//				em.createQuery(query,Order.class)
+//						.setParameter("memberName", "yhoood")
+//						.setFirstResult(0)    // 조회 시작 위치
+//						.setMaxResults(6)
+//						.getResultList();
 
 
 		List<Order> resultList5 =
@@ -128,7 +127,7 @@ class DockerJpaTestApplicationTests {
 		}
 
 		List<Member> resultList5_2 =
-				em.createQuery("SELECT distinct m FROM Member m join fetch m.OrderList",Member.class)
+				em.createQuery("SELECT distinct m FROM Member m join fetch m.orderList",Member.class)
 						.getResultList();
 
 		for (Member result : resultList5_2) {

@@ -6,8 +6,8 @@ import com.example.jpashop.repository.MemberRepository;
 import com.example.jpashop.repository.OrderRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
@@ -22,9 +22,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-@RunWith(SpringRunner.class)
+
 @SpringBootTest
 @Transactional(readOnly = true)
 public class MemberServiceTest {

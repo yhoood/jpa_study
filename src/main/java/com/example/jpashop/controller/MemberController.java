@@ -51,9 +51,9 @@ public class MemberController {
     @GetMapping("/membersPage")
     public Page<MemberDto> memberList2(Pageable pageable) {
         log.info("memberList controller");
-        Page<Member> page = memberService.findByMemberName("고구마",pageable);
-        //Page<MemberDto> result = page.map(member ->new MemberDto(member)); 변환전
-        Page<MemberDto> result = page.map(MemberDto::new);
+        Page<Member> page = memberService.findMemberPage(pageable);
+        Page<MemberDto> result = page.map(member ->new MemberDto(member)); //변환전
+        //Page<MemberDto> result = page.map(MemberDto::new);
         return result;
     }
 }

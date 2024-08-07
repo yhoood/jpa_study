@@ -41,8 +41,7 @@ public class MemberServiceTest {
     @Rollback(false)
     public void springDataJpaTest() throws Exception {
         PageRequest pageRequest = PageRequest.of(0, 2,Sort.by(Sort.Direction.DESC,"memberName"));
-//        Page<Member> page = memberRepository.findAll(pageRequest);
-        Page<Member> page = memberService.findByMemberName("고구마",pageRequest);
+        Page<Member> page = memberService.findMemberPage(pageRequest);
         System.out.println(page.getContent());
         System.out.println(page.getContent().size());
         System.out.println(page.getTotalElements());

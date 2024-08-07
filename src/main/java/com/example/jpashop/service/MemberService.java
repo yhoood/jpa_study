@@ -68,8 +68,8 @@ public class MemberService {
     }
 
     //!!!!!!!!!!!!!!!!!!!Page처리
-    public Page<Member> findByMemberName(String memberName, Pageable pageable) {
-        return memberRepository.findByMemberName(memberName,pageable);
+    public Page<Member> findMemberPage(Pageable pageable) {
+        return memberRepository.findMemberPage(pageable);
     }
 
     //method name query (optional)

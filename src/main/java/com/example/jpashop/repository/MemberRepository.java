@@ -20,9 +20,9 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     Member findByMemberId(long id);
 
     //페이징 처리 쿼리메소드
-    @Query(value = "select m from Member m left join m.orderList ol",
+    @Query(value = "select m from Member m",
                 countQuery = "select count(m.memberName) from Member m")
-    Page<Member> findByMemberName(String memberName, Pageable pageable);
+    Page<Member> findMemberPage(Pageable pageable);
 
     //method name query (optional)
     Optional<Member> findByMemberIdAndMemberName(long id,String name);

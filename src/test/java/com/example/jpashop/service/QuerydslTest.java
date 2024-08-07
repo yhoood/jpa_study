@@ -5,6 +5,9 @@ import com.example.domain.jpashop.QMember;
 import com.example.domain.jpashop.QOrder;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.Tuple;
+import com.querydsl.core.types.dsl.CaseBuilder;
+import com.querydsl.core.types.dsl.Expressions;
+import com.querydsl.core.types.dsl.NumberExpression;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
@@ -365,6 +368,69 @@ public class QuerydslTest {
                     )
                   [13, 태양]
                  */
+    }
+
+    /*
+    단순 case와
+    new CaseBuilder()
+     */
+    @Test
+    public void caseTest() throws Exception {
+                queryFactory
+                .select(member.address.city
+                        .when("천안").then("충청도")
+                        .when("안양").then("경기도")
+                        .otherwise("기타").as("지역")
+                        )
+                .from(member)
+                .fetch().stream().forEach(System.out::println);
+
+                queryFactory
+                .select(new CaseBuilder()
+                        .when(member.memberId.between(0,5)).then("0~5")
+                        .when(member.memberId.between(5,10)).then("5~10")
+                        .otherwise("기타")
+                )
+                .from(member)
+                .fetch().stream().forEach(System.out::println);
+
+
+                System.out.println("rank============================");
+                NumberExpression<Integer> rankPath = new CaseBuilder()
+                .when(member.memberId.between(0, 5)).then(2)
+                .when(member.memberId.between(5, 10)).then(1)
+                .otherwise(3);
+
+                queryFactory
+                .select(member.memberId,member.memberName)
+                .from(member)
+                .orderBy(rankPath.desc())
+                .fetch().stream().forEach(System.out::println);
+    }
+
+    /*
+    * Expression.constant 상수 사용
+    * concat(문자합치기)
+    * */
+    @Test
+    public void Express() throws Exception {
+        //상수타입 선언
+        Tuple result = queryFactory
+                .select(member.memberName, Expressions.constant("A"))
+                .from(member)
+                .fetchFirst();
+
+        System.out.println("result.toString() = " + result.toString());
+
+        //문자열 합치기
+        String result2 = queryFactory
+                .select(member.memberName.concat("_").concat(member.memberId.stringValue()))
+                .from(member)
+                .where(member.memberName.eq("김사과"))
+                .fetchOne();
+
+        System.out.println("result2.toString() = " + result2.toString());
+
     }
 
 //queryFactory.selectFrom(member).fetch().stream().forEach(System.out::println);

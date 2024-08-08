@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 public class MemberDto {
     private String memberName;
+    private Integer memberAge;
     private String city;
     private String street;
     private String zipcode;
@@ -21,6 +22,14 @@ public class MemberDto {
 
     public MemberDto(String memberName, String city, String street, String zipcode) {
         this.memberName = memberName;
+        this.city = city;
+        this.street = street;
+        this.zipcode = zipcode;
+    }
+    @QueryProjection
+    public MemberDto(String memberName, Integer memberAge, String city, String street, String zipcode) {
+        this.memberName = memberName;
+        this.memberAge = memberAge;
         this.city = city;
         this.street = street;
         this.zipcode = zipcode;

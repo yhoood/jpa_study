@@ -24,6 +24,9 @@ public class Member extends BaseEntity {
     @Column(name="member_name")
     private String memberName;
 
+    @Column(name="member_age")
+    private Integer memberAge;
+
     @Embedded
     private Address address;
 
@@ -36,6 +39,12 @@ public class Member extends BaseEntity {
 
     public Member(String memberName, Address address) {
         this.memberName = memberName;
+        this.address = address;
+    }
+
+    public Member(String memberName,Integer memberAge, Address address) {
+        this.memberName = memberName;
+        this.memberAge = memberAge;
         this.address = address;
     }
 

@@ -3,6 +3,8 @@ package com.example.jpashop.controller;
 import com.example.domain.jpashop.Address;
 import com.example.domain.jpashop.Member;
 import com.example.jpashop.dto.MemberDto;
+import com.example.jpashop.parameter.MemberSearchParameter;
+import com.example.jpashop.repository.MemberRepository;
 import com.example.jpashop.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +23,8 @@ import java.util.Map;
 public class MemberController {
 
     private final MemberService memberService;
+
+    private final MemberRepository memberRepository;
 
     @PostMapping("/signIn")
     public Map<String, Object> signIn(@RequestParam Map<String, Object> paramMap) {
@@ -55,5 +59,11 @@ public class MemberController {
         Page<MemberDto> result = page.map(member ->new MemberDto(member)); //변환전
         //Page<MemberDto> result = page.map(MemberDto::new);
         return result;
+    }
+
+    @GetMapping("/call")
+    public List<MemberDto> call(MemberSearchParameter param) {
+        log.info("call controller");
+        return memberRepository.searchWhereParam(param);
     }
 }

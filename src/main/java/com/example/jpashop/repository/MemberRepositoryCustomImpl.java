@@ -62,7 +62,7 @@ public class MemberRepositoryCustomImpl implements MemberRepositoryCustom {
                         ,member.address.zipcode))
                 .from(member)
                 .where(memberNameEq(param.getMemberName())
-                       ,hasText(param.getCity()) ? member.address.city.like(param.getCity()) : null //재사용 안할경우
+                       ,hasText(param.getCity()) ? member.address.city.like('%'+param.getCity()+'%') : null //재사용 안할경우
                         //,cityLike(pCity)
                        ,ageGoe(param.getAgeGoe())
                        ,ageLoe(param.getAgeLoe()))

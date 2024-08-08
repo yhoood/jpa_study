@@ -30,7 +30,7 @@ public class QuerydslQuery {
     @Test
     public void whereParamTest() throws Exception {
         MemberSearchParameter param = new MemberSearchParameter();
-        param.setMemberName("member20");
+        param.setCity("city");
         param.setAgeGoe(15);
         param.setAgeLoe(30);
         memberRepository.searchWhereParam(param).stream().forEach(System.out::println);

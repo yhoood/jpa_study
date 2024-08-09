@@ -16,7 +16,8 @@ public class MemberTestRepository extends Querydsl4RepositorySupport {
 //        return selectFrom(member)
 //                .fetch();
 //    }
-//    public Page<Member> searchPageByApplyPage(MemberSearchCondition condition, Pageable pageable) {
+//    public Page<Member> searchPageByApplyPage(MemberSearchCondition condition,
+//                                              Pageable pageable) {
 //        JPAQuery<Member> query = selectFrom(member)
 //                .leftJoin(member.team, team)
 //                .where(usernameEq(condition.getUsername()),

@@ -69,15 +69,11 @@ public abstract class Querydsl4RepositorySupport {
     protected <T> JPAQuery<T> selectFrom(EntityPath<T> from) {
         return getQueryFactory().selectFrom(from);
     }
-//    protected <T> Page<T> applyPagination(Pageable pageable, Function<JPAQueryFactory, JPAQuery> contentQuery) {
-//        JPAQuery jpaQuery = contentQuery.apply(getQueryFactory());
-//        List<T> content = getQuerydsl().applyPagination(pageable, jpaQuery).fetch();
-//        return PageableExecutionUtils.getPage(content, pageable, jpaQuery::fetchCount);
-//    }
-    protected <T> Page<T> applyPagination(Pageable pageable, Function<JPAQueryFactory, JPAQuery> contentQuery, JPAQuery<Long> countQuery) {
+
+    protected <T> Page<T> applyPagination(Pageable pageable, Function<JPAQueryFactory, JPAQuery> contentQuery, Function<JPAQueryFactory, JPAQuery<Long>> countQuery) {
         JPAQuery jpaContentQuery = contentQuery.apply(getQueryFactory());
         List<T> content = getQuerydsl().applyPagination(pageable, jpaContentQuery).fetch();
-        //JPAQuery countResult = countQuery.apply(getQueryFactory());
+        JPAQuery<Long> countResult = countQuery.apply(getQueryFactory());
 
         //람다식
         //1 : LongSupplier 구현체
@@ -92,10 +88,10 @@ public abstract class Querydsl4RepositorySupport {
         //LongSupplier su = () -> 0L;;
 
         //3 : LongSupplier 메소드참조
-        //LongSupplier su = ()-> countQuery.fetchOne();
+        //LongSupplier su = ()-> countResult.fetchOne();
 
         //4 :람다 메소드 리퍼런스
-        LongSupplier su = countQuery::fetchOne;
-        return PageableExecutionUtils.getPage(content, pageable, su); //()->countQuery.fetchOne() //countQuery::fetchOne
+        //LongSupplier su = countQuery::fetchOne;
+        return PageableExecutionUtils.getPage(content, pageable,countResult::fetchOne); //()->countQuery.fetchOne() //countQuery::fetchOne
     }
 }

@@ -118,7 +118,7 @@ public class MemberRepositoryCustomImpl implements MemberRepositoryCustom {
                                 ,ageLoe(param.getAgeLoe()))
                         //.orderBy(pageable.getSort()) //Querydsl에서는 페이징처리시 orderby가 잘 먹지 않는다.
                         //Sort를 Querydsl의 OrderSpecifier로 변환해야함.
-                        //.orderBy(getOrderSpecifiersList(pageable))
+                        .orderBy(getOrderSpecifiersList(pageable))
                         .offset(pageable.getOffset())
                         .limit(pageable.getPageSize())
                         .fetch();
@@ -171,20 +171,24 @@ public class MemberRepositoryCustomImpl implements MemberRepositoryCustom {
     }
 
 
+    //Querydsl 동적정렬을 위한 메소드
     //OrderSpecifier 객체반환.
     //OrderSpecifier 생성자 : public OrderSpecifier(Order order, Expression<T> target)
-    public List<OrderSpecifier<?>> getOrderSpecifiersList(Pageable pageable) {
+    public OrderSpecifier[] getOrderSpecifiersList(Pageable pageable) {
         List<OrderSpecifier<?>> orderSpecifiersList = new ArrayList<>();
-
         //sort
         pageable.getSort().stream().forEach(sort -> {
             Order order = sort.isAscending() ? Order.ASC : Order.DESC;
-
+            //System.out.println("order = " + order);
             String property = sort.getProperty();
+            //System.out.println("property = " + property);
             Path<Object> target = Expressions.path(Object.class, member, property);
+            //System.out.println("target.toString() = " + target.toString());
             OrderSpecifier<?> orderSpecifier = new OrderSpecifier(order, target);
+            //System.out.println("orderSpecifier.toString() = " + orderSpecifier.toString());
             orderSpecifiersList.add(orderSpecifier);
         });
-        return orderSpecifiersList;
+        //OrderSpecifier타입으로 리턴하기 위해 스트림 toArry 사용.
+        return orderSpecifiersList.stream().toArray(OrderSpecifier[]::new);
     }
 }

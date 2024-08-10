@@ -18,6 +18,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.example.domain.jpashop.QMember.member;
@@ -62,7 +63,9 @@ public class QuerydslQuery {
 
     @Test
     public void searchPageComplexTest() throws Exception {
-        PageRequest pageRequest = PageRequest.of(0, 2, Sort.by(Sort.Direction.DESC,"memberName"));
+        PageRequest pageRequest = PageRequest.of(0, 2,
+                Sort.by(Sort.Direction.DESC,"memberName")
+                        .and(Sort.by(Sort.Direction.ASC, "memberAge")));
         MemberSearchParameter param = new MemberSearchParameter();
         param.setCity("city");
         param.setAgeGoe(15);
@@ -80,7 +83,9 @@ public class QuerydslQuery {
 
     @Test
     public void searchPaginationTest() throws Exception {
-        PageRequest pageRequest = PageRequest.of(0, 2, Sort.by(Sort.Direction.DESC,"memberName"));
+        PageRequest pageRequest = PageRequest.of(0, 2,
+                Sort.by(Sort.Direction.DESC,"memberName")
+                        .and(Sort.by(Sort.Direction.ASC, "memberAge")));
         MemberSearchParameter param = new MemberSearchParameter();
         param.setCity("city");
         param.setAgeGoe(15);
@@ -100,7 +105,9 @@ public class QuerydslQuery {
     //테스트 필요
     @Test
     public void getOrderSpecifiersListTest() throws Exception {
-        PageRequest pageRequest = PageRequest.of(0, 2, Sort.by(Sort.Direction.DESC,"memberName"));
+        PageRequest pageRequest = PageRequest.of(0, 2,
+                Sort.by(Sort.Direction.DESC,"memberName")
+                        .and(Sort.by(Sort.Direction.ASC,"memberAge")));
         
         List<OrderSpecifier<?>> orderSpecifiersList = new ArrayList<>();
         //sort
@@ -112,6 +119,10 @@ public class QuerydslQuery {
             OrderSpecifier<?> orderSpecifier = new OrderSpecifier(order, target);
             orderSpecifiersList.add(orderSpecifier);
         });
+        OrderSpecifier[] array = orderSpecifiersList.stream().toArray(OrderSpecifier[]::new);
+        System.out.println("Arrays.stream(array).toArray() = " + Arrays.stream(array).toString());
+        System.out.println("==============================");
+        orderSpecifiersList.stream().forEach(System.out::println);
 
     }
 }

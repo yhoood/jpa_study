@@ -5,6 +5,7 @@ import com.example.domain.jpashop.Member;
 import com.example.jpashop.dto.MemberDto;
 import com.example.jpashop.parameter.MemberSearchParameter;
 import com.example.jpashop.repository.MemberRepository;
+import com.example.jpashop.repository.MemberSupportRepository;
 import com.example.jpashop.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +26,7 @@ public class MemberController {
     private final MemberService memberService;
 
     private final MemberRepository memberRepository;
+    private final MemberSupportRepository memberSupportRepository;
 
     @PostMapping("/signIn")
     public Map<String, Object> signIn(@RequestParam Map<String, Object> paramMap) {
@@ -65,5 +67,18 @@ public class MemberController {
     public List<MemberDto> call(MemberSearchParameter param) {
         log.info("call controller");
         return memberRepository.searchWhereParam(param);
+    }
+
+    @GetMapping("/callPage")
+    public Page<MemberDto> callPage(MemberSearchParameter param, Pageable pageable) {
+        log.info("callPage controller");
+        return memberRepository.searchPageComplex(param,pageable);
+    }
+
+    @GetMapping("/callPages")
+    public Page<MemberDto> callPages(MemberSearchParameter param, Pageable pageable) {
+        log.info("callPages controller");
+        Page<Member> page =memberSupportRepository.searchPagination(param,pageable);
+        return  page.map(MemberDto::new);
     }
 }

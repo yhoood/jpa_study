@@ -33,10 +33,12 @@ public abstract class Querydsl4RepositorySupport {
     private Querydsl querydsl;
     private EntityManager entityManager;
     private JPAQueryFactory queryFactory;
+
     public Querydsl4RepositorySupport(Class<?> domainClass) {
         Assert.notNull(domainClass, "Domain class must not be null!");
         this.domainClass = domainClass;
     }
+
     @Autowired
     public void setEntityManager(EntityManager entityManager) {
         Assert.notNull(entityManager, "EntityManager must not be null!");
@@ -48,20 +50,19 @@ public abstract class Querydsl4RepositorySupport {
                 PathBuilder<>(path.getType(), path.getMetadata()));
         this.queryFactory = new JPAQueryFactory(entityManager);
     }
+
     @PostConstruct
     public void validate() {
         Assert.notNull(entityManager, "EntityManager must not be null!");
         Assert.notNull(querydsl, "Querydsl must not be null!");
         Assert.notNull(queryFactory, "QueryFactory must not be null!");
     }
+
     protected JPAQueryFactory getQueryFactory() {
         return queryFactory;
     }
     protected Querydsl getQuerydsl() {
         return querydsl;
-    }
-    protected EntityManager getEntityManager() {
-        return entityManager;
     }
     protected <T> JPAQuery<T> select(Expression<T> expr) {
         return getQueryFactory().select(expr);
@@ -75,23 +76,23 @@ public abstract class Querydsl4RepositorySupport {
         List<T> content = getQuerydsl().applyPagination(pageable, jpaContentQuery).fetch();
         JPAQuery<Long> countResult = countQuery.apply(getQueryFactory());
 
-        //람다식
-        //1 : LongSupplier 구현체
-//        LongSupplier su = new LongSupplier() {
-//            @Override
-//            public long getAsLong() {
-//                return 0;
-//            }
-//        };
-
-        //2 : LongSupplier 익명구현
-        //LongSupplier su = () -> 0L;;
-
-        //3 : LongSupplier 메소드참조
-        //LongSupplier su = ()-> countResult.fetchOne();
-
-        //4 :람다 메소드 리퍼런스
-        //LongSupplier su = countQuery::fetchOne;
         return PageableExecutionUtils.getPage(content, pageable,countResult::fetchOne); //()->countQuery.fetchOne() //countQuery::fetchOne
     }
 }
+            //countResult::fetchOne ->람다식
+            //1 : LongSupplier 구현체
+            //        LongSupplier su = new LongSupplier() {
+            //            @Override
+            //            public long getAsLong() {
+            //                return 0;
+            //            }
+            //        };
+
+            //2 : LongSupplier 익명구현
+            //LongSupplier su = () -> 0L;;
+
+            //3 : LongSupplier 메소드참조
+            //LongSupplier su = ()-> countResult.fetchOne();
+
+            //4 :람다 메소드 리퍼런스
+            //LongSupplier su = countQuery::fetchOne;

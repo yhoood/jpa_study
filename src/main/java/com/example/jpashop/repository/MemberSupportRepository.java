@@ -3,20 +3,20 @@ package com.example.jpashop.repository;
 import com.example.common.Querydsl4RepositorySupport;
 import com.example.domain.jpashop.Member;
 
-import com.example.jpashop.dto.QMemberDto;
 import com.example.jpashop.parameter.MemberSearchParameter;
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.jpa.impl.JPAQuery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 import static com.example.domain.jpashop.QMember.member;
 import static org.springframework.util.StringUtils.hasText;
 
-public class MemberTestRepository extends Querydsl4RepositorySupport {
-    public MemberTestRepository() {
+@Repository
+public class MemberSupportRepository extends Querydsl4RepositorySupport {
+    public MemberSupportRepository() {
         super(Member.class);
     }
     public List<Member> basicSelect() {
@@ -28,14 +28,9 @@ public class MemberTestRepository extends Querydsl4RepositorySupport {
         return selectFrom(member)
                 .fetch();
     }
-    public Page<Member> applyPagination(MemberSearchParameter param, Pageable pageable) {
+    public Page<Member> searchPagination(MemberSearchParameter param, Pageable pageable) {
         return applyPagination(pageable, contentQuery -> contentQuery
-                        .select(new QMemberDto(
-                                member.memberName
-                                ,member.memberAge
-                                ,member.address.city
-                                ,member.address.street
-                                ,member.address.zipcode))
+                        .select(member)
                         .from(member)
                         .where(memberNameEq(param.getMemberName())
                                 ,hasText(param.getCity()) ? member.address.city.like('%'+param.getCity()+'%') : null //재사용 안할경우

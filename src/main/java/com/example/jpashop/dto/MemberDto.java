@@ -37,6 +37,7 @@ public class MemberDto {
 
     public MemberDto(Member member) {
         this.memberName = member.getMemberName();
+        this.memberAge = member.getMemberAge();
         this.city = member.getAddress().getCity();
         this.street = member.getAddress().getStreet();
         this.zipcode = member.getAddress().getZipcode();

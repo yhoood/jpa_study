@@ -74,7 +74,7 @@ public class MemberService {
 
     //method name query (optional)
     public Member findByMemberIdAndMemberName(long id, String name) {
-        return memberRepository.findByMemberIdAndMemberName(id, name).orElse(Member.createMember("이든"));
+        return memberRepository.findByMemberIdAndMemberName(id, name).orElse(Member.nameBuilder().memberName("이든").build());
     }
 
     //method name query (in)

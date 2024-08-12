@@ -36,6 +36,16 @@ public class MemberServiceTest {
     MemberService memberService;
 //    @Autowired
 //    OrderRepository orderRepository;
+
+    @Test
+    @Transactional
+    @Rollback(false)
+    public void builderTest() throws Exception {
+        Member m1 = new Member("dd");
+        Member m2 = Member.nameBuilder().memberName("name").build();
+
+    }
+
     @Test
     @Transactional
     @Rollback(false)

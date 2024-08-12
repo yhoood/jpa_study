@@ -1,10 +1,7 @@
 package com.example.domain.jpashop;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.*;
 
@@ -33,15 +30,16 @@ public class Member extends BaseEntity {
     @OneToMany(mappedBy = "member")
     private List<Order> orderList=new ArrayList<>();
 
+    @Builder(builderMethodName = "nameBuilder")
     public Member(String memberName) {
         this.memberName = memberName;
     }
-
+    @Builder(builderMethodName = "nameAddrBuilder")
     public Member(String memberName, Address address) {
         this.memberName = memberName;
         this.address = address;
     }
-
+    @Builder(builderMethodName = "nameAgeAddrBuilder")
     public Member(String memberName,Integer memberAge, Address address) {
         this.memberName = memberName;
         this.memberAge = memberAge;
@@ -53,7 +51,7 @@ public class Member extends BaseEntity {
     }
 
     public static Member createMember(String memberName){
-        return new Member(memberName);
+        return Member.nameBuilder().memberName(memberName).build();
     }
 
 }

@@ -125,7 +125,7 @@ public class QuerydslTest {
     /*
     Projections.bean() 세터주입
     Projections.fields() 필드주입
-    Projections.constructor() 필드주입
+    Projections.constructor() 생성자주입
 
     Tip -> Dto의 변수명이 다르면 member.meberName.as("dtoMemberName")
      */
